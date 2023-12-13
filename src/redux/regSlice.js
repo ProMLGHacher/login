@@ -13,6 +13,7 @@ export const regSlice = createSlice({
         reset: (state, action) => {
             state.message = undefined
             state.error = undefined
+            state.loading = false
         },
     },
     extraReducers: (builder) => {
@@ -28,6 +29,7 @@ export const regSlice = createSlice({
         builder.addCase(regThunk.rejected, (state, action) => {
             const payload = action.payload
 
+            state.error = payload
             state.loading = false
         })
     }
@@ -44,6 +46,9 @@ export const regThunk = createAsyncThunk("regThunk", async (data, { rejectWithVa
             body: JSON.stringify(data)
         })
         const json = await result.json()
+        if (result.status === 400) {
+            rejectWithValue(json)
+        }
         return json
     } catch (error) {
         console.log(error);

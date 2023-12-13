@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom'
 import Reg from './reg/Reg'
 import Log from './auth/Auth'
 import { useSelector } from 'react-redux'
+import MainPage from './MainPage'
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
 const authRouter = createBrowserRouter([
   {
     path: '/',
-    element: <>msrifluherui</>
+    element: <MainPage />
   },
   {
     path: '/reg',
@@ -37,15 +38,35 @@ const authRouter = createBrowserRouter([
   },
 ])
 
+const authRouterAdmin = createBrowserRouter([
+  {
+    path: '/',
+    element: <MainPage />
+  },
+  {
+    path: '/reg',
+    element: <Navigate to="/" />
+  },
+  {
+    path: '/auth',
+    element: <Navigate to="/" />
+  },
+  {
+    path: 'admin',
+    element: <>admin</>
+  }
+])
+
 function App() {
 
   const token = useSelector((state) => state.auth.token)
+  const role = useSelector((state) => state.auth.role)
 
   console.log(token);
 
 
   return (
-    token ? <RouterProvider router={authRouter} /> :
+    token ? role === "ADMIN" ? <RouterProvider router={authRouterAdmin} /> : <RouterProvider router={authRouter} /> :
     <RouterProvider router={router} />
   )
 }

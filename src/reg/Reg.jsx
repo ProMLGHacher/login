@@ -37,7 +37,6 @@ const Reg = () => {
                         setPassword(e.target.value)
                     }} type="text" />
                     <button onClick={() => {
-                        console.log("хуй");
                         dispatch(regThunk({
                             username: username,
                             password: password

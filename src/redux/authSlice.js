@@ -18,6 +18,10 @@ export const authSlice = createSlice({
             state.name = undefined
             state.role = undefined
             state.token = undefined
+
+            localStorage.removeItem("token")
+            localStorage.removeItem("role")
+            localStorage.removeItem("name")
         }
     },
     extraReducers: (builder) => {
@@ -29,6 +33,10 @@ export const authSlice = createSlice({
             state.token = payload.token
             state.name = payload.user.name
             state.role = payload.user.role
+
+            localStorage.setItem("token", payload.token)
+            localStorage.setItem("name", payload.user.name)
+            localStorage.setItem("role", payload.user.role)
 
             state.error = undefined
             state.loading = false
