@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { logOut } from './redux/authSlice'
+import { useSelector } from 'react-redux'
 
 const MainPage = () => {
 

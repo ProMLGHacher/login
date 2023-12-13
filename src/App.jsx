@@ -66,7 +66,7 @@ function App() {
 
 
   return (
-    token ? role === "ADMIN" ? <RouterProvider router={authRouterAdmin} /> : <RouterProvider router={authRouter} /> :
+    token ? role === "ADMIN" ? <RouterProvider router={authRouterAdmin} /> : <RouterProvider router={authRouterAdmin} /> :
     <RouterProvider router={router} />
   )
 }
